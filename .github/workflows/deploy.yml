@@ -1,4 +1,4 @@
-name: CI
+name: Build & Push containers
 
 on: [push]
 
@@ -9,9 +9,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+    
+    - uses: actions/docker/login@8cdf801b322af5f369e00d85e9cf3a7122f49108
+    - name: Docker Registry
+      with: 
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - uses: actions/docker/cli@8cdf801b322af5f369e00d85e9cf3a7122f49108
+    - name: GitHub Action for Docker
+      run: build -t marekkowalonek/actions-docker-hub-demo src && docker push marekkowalonek/actions-docker-hub-demo
