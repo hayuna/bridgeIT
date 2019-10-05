@@ -4,14 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/docker/login@8cdf801b322af5f369e00d85e9cf3a7122f49108
-      name: Docker Registry
+    - name: START  
+      uses: actions/checkout@master
+    - name: Docker Registry
+      uses: actions/docker/login@8cdf801b322af5f369e00d85e9cf3a7122f49108
       env: 
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-    - uses: actions/docker/cli@8cdf801b322af5f369e00d85e9cf3a7122f49108
-      name: GitHub Action for Docker
+    - name: GitHub Action for Docker
+      uses: actions/docker/cli@8cdf801b322af5f369e00d85e9cf3a7122f49108
       run: |
         docker build src 
         docker push marekkowalonek/actions-docker-hub-demo
