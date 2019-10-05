@@ -5,8 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: 
+    - name: run tests
       run: |
+        npm install
         npm test
     # - name: Publish to DockerHub
     #   uses: elgohr/Publish-Docker-Github-Action@master
