@@ -4,8 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: START  
-      uses: actions/checkout@master
+    - uses: actions/checkout@master
     - name: Docker Registry
       uses: actions/docker/login@8cdf801b322af5f369e00d85e9cf3a7122f49108
       env: 
