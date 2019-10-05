@@ -1,1 +1,1 @@
-module.exports = () => `Hello world! ${Date.now()}`;
+module.exports = () => `Hello Heroku! ${Date.now()}`;
