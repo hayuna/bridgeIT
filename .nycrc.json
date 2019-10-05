@@ -2,5 +2,5 @@
     "check-coverage": true,
     "lines": 75,
     "include": ["**/*.js"],
-    "exclude": ["tests/**/*.js"]
+    "exclude": ["__tests__/**/*.js"]
 }
