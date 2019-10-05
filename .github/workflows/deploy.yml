@@ -6,7 +6,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Build the Docker image
-      run: docker build src/Dockerfile
+      run: docker build src
     #   run: |
     #     echo $DOCKER_USERNAME
     #     echo $DOCKER_PASSWORD
