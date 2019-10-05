@@ -6,8 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production babel-node .",
     "dev": "NODE_ENV=development babel-node .",
-    "test": "NODE_ENV=test nyc mocha tests/**/*.js",
-    "postinstall": "link-module-alias"
+    "test": "NODE_ENV=test nyc mocha tests/**/*.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
