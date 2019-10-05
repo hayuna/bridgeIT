@@ -1,4 +1,4 @@
 FROM node:8-alpine
 COPY . .
-RUN npm ci --only=production
+RUN npm start
 ENTRYPOINT [ "npm", "run", "start" ]
