@@ -5,15 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-      run: |
-        echo $DOCKER_USERNAME
-        echo $DOCKER_PASSWORD
-    - name: Docker Registry
-      uses: actions/docker/login@master
-      env: 
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: GitHub Action for Docker
-      run: |
-        docker build src 
-        docker push marekkowalonek/actions-docker-hub-demo
+    - name: Build the Docker image
+      run: docker build .
+    #   run: |
+    #     echo $DOCKER_USERNAME
+    #     echo $DOCKER_PASSWORD
+    # - name: Docker Registry
+    #   uses: actions/docker/login@master
+    #   env: 
+    #     username: ${{ secrets.DOCKER_USERNAME }}
+    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    # - name: GitHub Action for Docker
+    #   run: |
+    #     docker build src 
+    #     docker push marekkowalonek/actions-docker-hub-demo
