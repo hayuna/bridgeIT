@@ -11,8 +11,4 @@ jobs:
         name: marekkowalonek/docker
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: src/Dockerfile
-    # - name: Build the Docker image
-    #   run: |
-    #     docker build src
-        # docker push marekkowalonek/docker
+        dockerfile: Dockerfile
