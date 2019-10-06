@@ -9,7 +9,7 @@ jobs:
       run: npm install
     - name: run tests
       run: npm test
-      with:
+      env:
         MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}
     # - name: Publish to DockerHub
     #   uses: elgohr/Publish-Docker-Github-Action@master
