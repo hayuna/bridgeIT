@@ -44,9 +44,9 @@ describe('Roles', () => {
         console.log(typeof expectedResponse.isActive)
         console.log(expectedResponse.isActive)
 
-        expect(Boolean(expectedResponse.isActive)).should.equal(false);
-        expect(String(expectedResponse.name)).should.equal(role.name);
-        expect(String(expectedResponse.color)).should.equal(role.color);
+        expect(expectedResponse.isActive).should.equal(false);
+        expect(expectedResponse.name).should.equal(role.name);
+        expect(expectedResponse.color).should.equal(role.color);
     });
 
     it('PATCH /role', (done) => {
