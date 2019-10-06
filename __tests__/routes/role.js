@@ -2,93 +2,78 @@ import chai, {expect} from 'chai';
 import chaiHttp  from 'chai-http'
 import { Role } from "../../src/models";
 import server from "../../index";
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+let mongoServer;
+const opts = { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: true };
+
+before((done) => {
+    mongoServer = new MongoMemoryServer();
+    mongoServer
+        .getConnectionString()
+        .then((mongoUri) => {
+            return mongoose.connect(mongoUri, opts, err => {
+                if(err) done(err);
+            });
+        })
+        .then(() => done());
+});
+
+after(async () => {
+    await mongoose.disconnect();
+    await mongoServer.stop();
+})
 
 let should = chai.should();
 chai.use(chaiHttp);
 
-describe('Roles', function() {
-    this.timeout(10000);
+describe('Roles', () => {
+    it('GET /role', async () => {
+        const roles = await Role.countDocuments();
+        expect(roles).to.equal(0);
+    });
+    
+    it('POST /role', async () => {
+        const role = {
+            name: "sam9ple text_88",
+            color: "#fff"
+        };
+        const result = await chai.request(server).post('/role').send(role)
+        const expectedResponse = JSON.parse(result.res.text);
+        console.log(typeof expectedResponse.isActive)
+        console.log(expectedResponse.isActive)
 
-    beforeEach(async () => {
-        await Role.deleteMany({});
+        expect(Boolean(expectedResponse.isActive)).should.equal(false);
+        expect(String(expectedResponse.name)).should.equal(role.name);
+        expect(String(expectedResponse.color)).should.equal(role.color);
     });
 
-    describe('GET /role', () => {
-        it('it should return an empty array', (done) => {
-            chai.request(server)
-                .get('/role')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('array');
-                    res.body.length.should.be.eql(0);
-                    done();
-                });
-        });
-    });
-
-    describe('POST /role', () => {
-        it('should accept new role, save it and provide feedback', (done) => {
-            const role = {
-                name: "sample text",
-                color: "#fff"
-            };
-            chai.request(server)
-                .post('/role')
-                .send(role)
-                .end((err, res) => {
-                    res.should.have.status(201);
-
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('_id');
-                    res.body.should.have.property('name');
-                    res.body.should.have.property('color');
-                    res.body.should.have.property('isActive');
-
-                    res.body["isActive"].should.equal(false);
-                    res.body["name"].should.equal(role.name);
-                    res.body["color"].should.equal(role.color);
-
-                    done();
-                });
+    it('PATCH /role', (done) => {
+        const role = new Role({
+            name: "sample text",
+            color: "#333"
         });
 
-        describe('PATCH /role', () => {
-            it('should accept role patch, and provide feedback with success property of true', (done) => {
-                const role = new Role({
-                    name: "sample text",
-                    color: "#333"
-                });
-
-                role.save()
-                    .then( savedRole => {
-
-                        const rolePatch = {
-                            name: "sample text 2",
-                            color: "#666"
-                        };
-
-                        chai.request(server)
-                            .patch(`/role/${savedRole._id}`)
-                            .send(rolePatch)
-                            .end(async (err, res) => {
-                                res.should.have.status(200);
-
-                                res.body.should.be.a('object');
-                                res.body.should.have.property('success');
-                                res.body["success"].should.equal(true);
-
-                                const retrievedUpdatedRole = await Role.findById(savedRole._id);
-
-                                expect(rolePatch["name"]).to.equal(retrievedUpdatedRole["name"]);
-                                expect(rolePatch["color"]).to.equal(retrievedUpdatedRole["color"]);
-
-                                done();
-                            });
-
-                    })
-            });
-
-        });
-
+        role.save()
+            .then( savedRole => {
+                const rolePatch = {
+                    name: "sample text 2",
+                    color: "#666"
+                };
+                chai.request(server)
+                    .patch(`/role/${savedRole._id}`)
+                    .send(rolePatch)
+                    .end(async (err, res) => {
+                        res.should.have.status(200);
+                        res.body.should.be.a('object');
+                        res.body.should.have.property('success');
+                        res.body["success"].should.equal(true);
+                        const retrievedUpdatedRole = await Role.findById(savedRole._id);
+                        expect(rolePatch["name"]).to.equal(retrievedUpdatedRole["name"]);
+                        expect(rolePatch["color"]).to.equal(retrievedUpdatedRole["color"]);
+                        done();
+                    });
+            })
     });
 });

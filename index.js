@@ -10,6 +10,9 @@ config.mongo_connect();
 config.initNodeMailer();
 config.kickstartScheduler();
 
+app.get('/', (req, res) => {
+    res.send(`works`)
+});
 app.use('/test', test);
 app.use('/role', role);
 app.use('/user', user);

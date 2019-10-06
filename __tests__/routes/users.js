@@ -1,11 +1,7 @@
-import chai, {
-    expect
-} from 'chai';
+import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http'
 
-import {
-    User
-} from "../../src/models";
+import { User } from "../../src/models";
 import server from "../../index";
 
 let should = chai.should();

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=production babel-node .",
     "dev": "NODE_ENV=development babel-node .",
-    "test": "NODE_ENV=test nyc mocha __tests__/**/*.js"
+    "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
+    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./.babelrc,./package.json --copy-files"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -35,6 +36,8 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "micro-dev": "^3.0.0",
-    "mocha": "^6.2.1"
+    "mocha": "^6.2.1",
+    "mockgoose": "^8.0.3",
+    "mongodb-memory-server": "^5.2.6"
   }
 }

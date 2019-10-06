@@ -23,7 +23,6 @@ const setHeaders = res => {
 };
 
 const mongo_connect = () => {
-    mongoose.set('useCreateIndex', true);
     let mongo_url
     console.log(process.env.NODE_ENV);
     switch(process.env.NODE_ENV) {
@@ -39,7 +38,7 @@ const mongo_connect = () => {
         default:
             mongo_url = process.env.MONGO_URL_DEV;
     }
-    mongoose.connect(mongo_url, { useNewUrlParser: true });
+    mongoose.connect(mongo_url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 };
 
 const useMiddleware = app => {
