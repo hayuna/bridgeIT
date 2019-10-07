@@ -27,7 +27,21 @@ jobs:
       uses: actions/docker/tag@master
       with:
         args: heroku github/heroku --no-latest
-    - name: Docker Publish
-      uses: actions/docker/cli@master
+- name: login
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PREPROD }}
       with:
-        args: push github/heroku
+        args: container:login
+    - name: push
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PREPROD }}
+      with:
+        args: container:push -a pre-bridgeit-api web
+    - name: release
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PREPROD }}
+      with:
+        args: container:release -a pre-bridgeit-api web
