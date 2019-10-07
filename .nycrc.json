@@ -1,6 +1,6 @@
 {
     "check-coverage": true,
-    "lines": 75,
+    "lines": 5,
     "include": ["**/*.js"],
     "exclude": ["__tests__/**/*.js"]
 }
