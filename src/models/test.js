@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import { ensureFieldUniquity } from './utils';
-import { Test } from 'mocha';
 
 const TestSchema = new Schema({
     name: { type: String },

@@ -8,7 +8,8 @@
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
     "clean": "rimraf dist",
-    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./.babelrc,./package.json --copy-files"
+    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./.babelrc,./package.json --copy-files",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@hapi/joi": "^16.1.7",
