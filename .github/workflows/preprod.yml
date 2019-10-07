@@ -27,7 +27,7 @@ jobs:
       uses: actions/docker/tag@master
       with:
         args: heroku github/heroku --no-latest
-- name: login
+    - name: login
       uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PREPROD }}
