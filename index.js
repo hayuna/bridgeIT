@@ -11,7 +11,7 @@ config.initNodeMailer();
 config.kickstartScheduler();
 
 app.get('/', (req, res) => {
-    res.send(`works`)
+    res.send(`PREPROD WORKS`)
 });
 app.use('/test', test);
 app.use('/role', role);
