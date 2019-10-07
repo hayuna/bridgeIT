@@ -41,8 +41,6 @@ describe('Roles', () => {
         };
         const result = await chai.request(server).post('/role').send(role)
         const expectedResponse = JSON.parse(result.res.text);
-        console.log(typeof expectedResponse.isActive)
-        console.log(expectedResponse.isActive)
 
         expect(expectedResponse.isActive).should.equal(false);
         expect(expectedResponse.name).should.equal(role.name);

@@ -24,8 +24,6 @@ const setHeaders = res => {
 
 const mongo_connect = () => {
     let mongo_url
-    console.log(process.env.NODE_ENV);
-    console.log(process.env);
     switch(process.env.NODE_ENV) {
         case 'test':
             mongo_url = process.env.MONGO_URL_TEST;

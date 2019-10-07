@@ -1,13 +1,5 @@
 'use strict';
 
-var _typeof2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _typeof = typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol" ? function (obj) {
-    return typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-} : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof2(obj);
-};
-
 var _chai = require('chai');
 
 var _chai2 = _interopRequireDefault(_chai);
@@ -67,12 +59,10 @@ describe('Roles', function () {
         };
         var result = await _chai2.default.request(_index2.default).post('/role').send(role);
         var expectedResponse = JSON.parse(result.res.text);
-        console.log(_typeof(expectedResponse.isActive));
-        console.log(expectedResponse.isActive);
 
-        (0, _chai.expect)(Boolean(expectedResponse.isActive)).should.equal(false);
-        (0, _chai.expect)(String(expectedResponse.name)).should.equal(role.name);
-        (0, _chai.expect)(String(expectedResponse.color)).should.equal(role.color);
+        (0, _chai.expect)(expectedResponse.isActive).should.equal(false);
+        (0, _chai.expect)(expectedResponse.name).should.equal(role.name);
+        (0, _chai.expect)(expectedResponse.color).should.equal(role.color);
     });
 
     it('PATCH /role', function (done) {

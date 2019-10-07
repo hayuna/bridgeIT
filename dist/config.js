@@ -51,7 +51,6 @@ var setHeaders = function setHeaders(res) {
 
 var mongo_connect = function mongo_connect() {
     var mongo_url = void 0;
-    console.log(process.env.NODE_ENV);
     switch (process.env.NODE_ENV) {
         case 'test':
             mongo_url = process.env.MONGO_URL_TEST;
