@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 const app = express();
 
+
 config.useMiddleware(app);
 config.mongo_connect();
 config.initNodeMailer();
