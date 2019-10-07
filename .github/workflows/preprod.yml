@@ -9,4 +9,11 @@ jobs:
       run: npm install
     - name: run eslint
       run: npm run lint
+    - name: deploy to heroku preprod
+      run: |
+        heroku login
+        heroku git:remote -a pre-bridgeit-api
+        git add .
+        git commit -am "test"
+        git push heroku master
     
