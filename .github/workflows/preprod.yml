@@ -1,4 +1,4 @@
-name: Build & Push containers
+name: PREPROD
 on: push
 jobs:
   build:
@@ -9,8 +9,4 @@ jobs:
       run: npm install
     - name: run eslint
       run: npm run lint
-    - name: run tests
-      run: npm test
-      env:
-        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}    
     

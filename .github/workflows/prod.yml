@@ -1,0 +1,16 @@
+name: PROD
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies
+      run: npm install
+    - name: run eslint
+      run: npm run lint
+    - name: run tests
+      run: npm test
+      env:
+        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}    
+    
