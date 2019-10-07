@@ -1,19 +1,41 @@
-name: PREPROD
-on: pull_request
+on: push
+name: Build and Publish
 jobs:
-  build:
+  dockerLint:
+    name: Docker Lint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Install dependencies
-      run: npm install
-    - name: run eslint
-      run: npm run lint
-    - name: deploy to heroku preprod
-      run: |
-        heroku login
-        heroku git:remote -a pre-bridgeit-api
-        git add .
-        git commit -am "test"
-        git push heroku master
-    
+    - name: Docker Lint
+      uses: docker://replicated/dockerfilelint
+      with:
+        args: Dockerfile
+    - name: Test
+      uses: actions/bin/bats@master
+      with:
+        args: test/*.bats
+    - name: Shell Lint
+      uses: actions/bin/shellcheck@master
+      with:
+        args: entrypoint.sh
+    - name: Publish Filter
+      uses: actions/bin/filter@master
+      with:
+        args: branch master
+    - name: Build
+      uses: actions/docker/cli@master
+      with:
+        args: build -t heroku .
+    - name: Docker Login
+      uses: actions/docker/login@master
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    - name: Docker Tag
+      uses: actions/docker/tag@master
+      with:
+        args: heroku github/heroku --no-latest
+    - name: Docker Publish
+      uses: actions/docker/cli@master
+      with:
+        args: push github/heroku
