@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production npm run clean && npm run backend:build && node dist/index.js",
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
-    "clean": "rmraf dist",
+    "clean": "rimraf dist",
     "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./.babelrc,./package.json --copy-files"
   },
   "dependencies": {
