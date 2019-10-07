@@ -1,29 +1,29 @@
-on: push
-name: Build and Publish
+on: pull_request
+name: PREPROD
 jobs:
   dockerLint:
-    name: Docker Lint
+    name: Deploy PREPROD to Heroku
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Docker Lint
-      uses: docker://replicated/dockerfilelint
-      with:
-        args: Dockerfile
-    - name: Publish Filter
-      uses: actions/bin/filter@master
-      with:
-        args: branch master
-    - name: Build
-      uses: actions/docker/cli@master
-      with:
-        args: build -t heroku .
-    - name: Docker Login
-      uses: actions/docker/login@master
-      env:
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-    - name: Docker Tag
+    # - name: Docker Lint
+    #   uses: docker://replicated/dockerfilelint
+    #   with:
+    #     args: Dockerfile
+    # - name: Publish Filter
+    #   uses: actions/bin/filter@master
+    #   with:
+    #     args: branch master
+    # - name: Build
+    #   uses: actions/docker/cli@master
+    #   with:
+    #     args: build -t heroku .
+    # - name: Docker Login
+    #   uses: actions/docker/login@master
+    #   env:
+    #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    # - name: Docker Tag
       uses: actions/docker/tag@master
       with:
         args: heroku github/heroku --no-latest
