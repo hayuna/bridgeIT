@@ -10,10 +10,6 @@ jobs:
       uses: docker://replicated/dockerfilelint
       with:
         args: Dockerfile
-    - name: Shell Lint
-      uses: actions/bin/shellcheck@master
-      with:
-        args: entrypoint.sh
     - name: Publish Filter
       uses: actions/bin/filter@master
       with:
