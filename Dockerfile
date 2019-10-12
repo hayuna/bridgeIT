@@ -13,6 +13,7 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle app source
+RUN npm run backend:build
 COPY . .
 
 EXPOSE 3000
