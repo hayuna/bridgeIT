@@ -20,5 +20,3 @@ RUN ls -la client
 RUN ls -la client/build
 RUN ls -la dist
 RUN npm install bcrypt
-
-RUN NODE_ENV=production node dist/index.js
