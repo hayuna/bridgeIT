@@ -4,7 +4,7 @@ COPY . .
 RUN npm install
 RUN npm run backend:build
 COPY . .
-RUN ls -la dist
+RUN ls -la client
 
 
 EXPOSE 3000
