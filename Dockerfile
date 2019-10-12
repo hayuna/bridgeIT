@@ -2,5 +2,22 @@ FROM node:8
 WORKDIR /usr/src/app
 COPY . .
 RUN npm install
-RUN npm start
-CMD [ "node", "dist" ]
+RUN ls -la
+
+RUN npm run client:build
+RUN ls -la
+RUN ls -la client
+RUN ls -la client/build
+
+RUN npm run clean
+RUN ls -la
+RUN ls -la client
+RUN ls -la client/build
+
+RUN npm run backend:build
+RUN ls -la
+RUN ls -la client
+RUN ls -la client/build
+RUN ls -la dist
+
+RUN node dist/index.js
