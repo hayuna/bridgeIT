@@ -4,12 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm run client:build && node dist/index.js",
+    "start": "npm run client:build && npm run clean && npm run backend:build && node dist/index.js",
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
     "clean": "npm i && rimraf dist",
     "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./client,./package.json,./.babelrc --copy-files",
-    "client:build": "cd client && yarn && yarn build",
+    "client:build": "cd client && npm install && npm run build",
     "lint": "eslint ."
   },
   "dependencies": {
