@@ -14,7 +14,10 @@ RUN npm install
 
 # Bundle app source
 RUN npm run backend:build
+RUN ls -la
 COPY . .
+RUN ls -la
+
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
