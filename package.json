@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "npm run client:build && node dist/index.js",
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
     "clean": "npm i && rimraf dist",
