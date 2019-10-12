@@ -20,7 +20,8 @@ app.use('/api/user', user);
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    res.send(`Hello`);
+    // res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 console.log(process.env)
