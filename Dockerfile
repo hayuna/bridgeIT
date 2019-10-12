@@ -14,9 +14,8 @@ RUN npm install
 
 # Bundle app source
 RUN npm run backend:build
-RUN ls -la
 COPY . .
-RUN ls -la
+RUN ls -la dist
 
 
 EXPOSE 3000
