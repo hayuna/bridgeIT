@@ -4,11 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm run clean && npm run backend:build && node dist/index.js",
+    "start": "npm run client:build && pwd && npm run clean && npm run backend:build && node dist/index.js",
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
-    "clean": "rimraf dist",
-    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./.babelrc,./package.json --copy-files",
+    "clean": "npm i && rimraf dist",
+    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./client/node_modules,./client/package.json,./package.json,./.babelrc,./client/yarn.lock,./client/src,./client/public --copy-files",
+    "client:build": "cd client && yarn && yarn build",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "bcrypt": "^3.0.6",
