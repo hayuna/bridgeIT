@@ -13,7 +13,7 @@ const ADMIN_EMAILS = [
     "email@example.com"
 ];
 
-import { roleNotifier } from "./src/jobs";
+import { roleNotifier } from "./server/jobs";
 
 const setHeaders = res => {
     res.setHeader('Access-Control-Allow-Origin', '*');

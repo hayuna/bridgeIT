@@ -1,6 +1,6 @@
 import express from 'express';
 import config from './config';
-import { role, test, user } from './src/routes';
+import { role, test, user } from './server/routes';
 import 'dotenv/config';
 
 const app = express();
@@ -12,7 +12,7 @@ config.initNodeMailer();
 config.kickstartScheduler();
 
 app.get('/', (req, res) => {
-    res.send(`PREPROD WORKS`)
+    res.send(`WORKS`)
 });
 app.use('/test', test);
 app.use('/role', role);
