@@ -1,1 +1,1 @@
-web: echo "test" && ls -la && node dist/index.js
+web: echo "test"
