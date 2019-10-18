@@ -1,5 +1,5 @@
 {
-    "presets": [ "env" ],
+    "presets": [ "env", "babel-preset-react", "babel-polyfill" ],
     "plugins": [
         ["transform-runtime", { "regenerator": true }]
     ]

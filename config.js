@@ -2,7 +2,6 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import bodyParser from 'body-parser'
 import schedule from "node-cron"
 import nodemailer from "nodemailer"
 
@@ -13,7 +12,7 @@ const ADMIN_EMAILS = [
     "email@example.com"
 ];
 
-import { roleNotifier } from "./src/jobs";
+import { roleNotifier } from "./server/jobs";
 
 const setHeaders = res => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,7 +21,7 @@ const setHeaders = res => {
     res.setHeader('Access-Control-Allow-Credentials', true);
 };
 
-const mongo_connect = () => {
+const useMongo = () => {
     let mongo_url
     switch(process.env.NODE_ENV) {
         case 'test':
@@ -44,7 +43,6 @@ const useMiddleware = app => {
     app.use(cors());
     app.use(helmet());
     app.use(morgan('dev'));
-    app.use(bodyParser.json());
 };
 
 const initNodeMailer = () => {
@@ -68,4 +66,4 @@ const kickstartScheduler = () => {
     schedule.schedule(`0 */${NOTIFICATION_INTERVAL} * * *`, () => roleNotifier(transporter, ADMIN_EMAILS));
 };
 
-export default { setHeaders, mongo_connect, useMiddleware, initNodeMailer, kickstartScheduler };
+export default { setHeaders, useMongo, useMiddleware, initNodeMailer, kickstartScheduler };

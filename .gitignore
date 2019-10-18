@@ -3,3 +3,5 @@ node_modules
 *.swp
 .env
 .nyc_output
+dist
+client/build
