@@ -1,8 +1,5 @@
 name: PROD
-on:
-  push:
-    branches:    
-      - master
+on: push
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,22 +13,4 @@ jobs:
       run: npm test
       env:
         MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}    
-    - name: login
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:login
-    - name: push
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:push -a bridgeit-api web
-    - name: release
-      uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      with:
-        args: container:release -a bridgeit-api web
     

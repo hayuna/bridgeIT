@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 on: pull_request
 name: PREPROD
 jobs:
@@ -24,3 +25,17 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY_PREPROD }}
       with:
         args: container:release -a pre-bridgeit-api web
+=======
+name: PREPROD
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install dependencies
+      run: npm install
+    - name: run eslint
+      run: npm run lint
+    
+>>>>>>> 22b3210... test
