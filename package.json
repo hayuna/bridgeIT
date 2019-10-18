@@ -9,7 +9,7 @@
     "dev": "NODE_ENV=development babel-node .",
     "test": "NODE_ENV=test nyc mocha __tests__/**/*.js",
     "clean": "npm i && rimraf dist",
-    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./client,./package.json,./.babelrc --copy-files",
+    "backend:build": "babel ./ -d dist/ --ignore ./node_modules,./client,./.babelrc --copy-files",
     "client:build": "cd client && npm install && npm run build",
     "lint": "eslint ."
   },
