@@ -12,5 +12,23 @@ jobs:
     - name: run tests
       run: npm test
       env:
-        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}    
+        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}   
+    - name: [heroku]login
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:login
+    - name: [heroku]push
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:push -a bridgeit-api web
+    - name: [heroku]release
+      uses: actions/heroku@master
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      with:
+        args: container:release -a bridgeit-api web 
     
