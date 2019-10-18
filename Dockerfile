@@ -3,3 +3,5 @@ WORKDIR /usr/src/app
 COPY . .
 RUN npm install
 RUN npm run backend:build
+RUN npm run lint
+RUN npm test

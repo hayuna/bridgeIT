@@ -15,14 +15,9 @@ jobs:
       uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}   
       with:
         args: container:push -a bridgeit-api web
-    - name: run eslint
-      run: npm run lint
-    - name: run tests
-      run: npm test
-      env:
-        MONGO_URL_TEST: ${{ secrets.MONGO_URL_TEST }}   
     - name: heroku -> release
       uses: actions/heroku@master
       env:
